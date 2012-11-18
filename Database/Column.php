@@ -1,6 +1,9 @@
 <?php
 namespace PGModel\Database;
 
+use \PGModel\Database\Types,
+    \PGModel\Database\Types\UnsupportedTypeException;
+
 class Column {
     private $name;
     private $datatype;
@@ -79,6 +82,10 @@ class Column {
             case 'date':
                 return $value ? $value->to_s() : '';
             default:
+                try {
+                    $value = Types::out($this->datatype, $value);
+                } catch (UnsupportedTypeException $e) {
+                }
                 return htmlspecialchars((string) $value);
         }
     }
@@ -107,13 +114,17 @@ class Column {
             }
         }
 
-
+        $format = ' '
         switch ($this->datatype) {
             case 'boolean':
                 return $value ? ' checked' : '';
             case 'date':
-                return ' value="' . $value->to_s() . '"';
+                return sprintf($format, $value->to_s());
             default:
+                try {
+                    $value = Types::out($this->datatype, $value);
+                } catch (UnsupportedTypeException $e) {
+                }
                 return ' value="' . ((string) $value) . '"';
         }
     }
@@ -138,6 +149,10 @@ class Column {
             case 'date':
                 return $value->to_s();
             default:
+                try {
+                    $value = Types::out($this->datatype, $value);
+                } catch (UnsupportedTypeException $e) {
+                }
                 return (string) $value;
         }
     }
@@ -183,11 +198,10 @@ class Column {
 
                 return Date::parse($value);
             default:
-                if ($value == '') {
-                    return null;
-                }
-                else {
-                    return $value;
+                try {
+                    return Types::in($this->datatype, $value);
+                } catch (UnsupportedTypeException $e) {
+                    return $value == '' ? null : $value;
                 }
         }
     }

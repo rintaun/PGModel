@@ -2,6 +2,7 @@
 namespace PGModel;
 
 use \PGModel\Database,
+    \PGModel\Database\Column,
     \PGModel\Utility\Inflection,
     \PGModel\Database\Column\BadColumnException,
     \PGModel\Database\Column\BadPrimaryKeyException,

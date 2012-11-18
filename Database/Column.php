@@ -114,7 +114,6 @@ class Column {
             }
         }
 
-        $format = ' '
         switch ($this->datatype) {
             case 'boolean':
                 return $value ? ' checked' : '';

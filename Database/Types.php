@@ -19,7 +19,7 @@ class Types {
         $type_name = strtolower($type_name);
         if (empty(static::$types[$type_name])) {
             $message = sprintf("No such type '%s'", $type_name);
-            throw new \UnsupportedTypeException($message);
+            throw new UnsupportedTypeException($message);
         } else if (!(static::$types[$type_name]['in'] instanceof
                      \Closure)) {
             $message = sprintf("No 'in' callback found for type '%s'",
@@ -34,7 +34,7 @@ class Types {
         $type_name = strtolower($type_name);
         if (empty(static::$types[$type_name])) {
             $message = sprintf("No such type '%s'", $type_name);
-            throw new \UnsupportedTypeException($message);
+            throw new UnsupportedTypeException($message);
         } else if (!(static::$types[$type_name]['in'] instanceof
                      \Closure)) {
             $message = sprintf("No 'out' callback found for type '%s'",

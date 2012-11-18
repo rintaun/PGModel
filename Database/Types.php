@@ -26,7 +26,7 @@ class Types {
                                $type_name);
             throw new \RuntimeException($message);
         }
-	$cb = static::$types[$type_name]['in'];
+        $cb = static::$types[$type_name]['in'];
         return $cb($value);
 
     }
@@ -42,7 +42,7 @@ class Types {
                                $type_name);
             throw new \RuntimeException($message);
         }
-	$cb = static::$types[$type_name]['out'];
+        $cb = static::$types[$type_name]['out'];
         return $cb($value);
     }
 }

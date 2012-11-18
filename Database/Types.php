@@ -4,7 +4,7 @@ namespace PGModel\Database;
 use \PGModel\Database\Types\UnsupportedTypeException;
 
 class Types {
-    static protected $types = [];
+    protected static $types = [];
 
     public static function register($type_name, \Closure $in,
                                     \Closure $out) {
@@ -26,7 +26,8 @@ class Types {
                                $type_name);
             throw new \RuntimeException($message);
         }
-        return static::$types[$type_name]['in']();
+	$cb = static::$types[$type_name]['in'];
+        return $cb($value);
 
     }
 
@@ -41,6 +42,7 @@ class Types {
                                $type_name);
             throw new \RuntimeException($message);
         }
-        return static::$types[$type_name]['out']();
+	$cb = static::$types[$type_name]['out'];
+        return $cb($value);
     }
 }

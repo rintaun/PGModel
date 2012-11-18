@@ -1,61 +1,60 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryLiteral implements _QueryTableExpression,
-                                   _QueryValueExpression {
+class Literal implements \PGModel\Expression\TableExpression,
+                         \PGModel\Expression\ValueExpression {
 
-        private $string;
+    private $string;
 
-        /**
-         * _QueryLiteral constructor
-         *
-         * @param string $string The literal SQL to include
-         * @return _QueryLiteral
-         */
-        function __construct($string) {
-            if (is_a($string, '_QueryExpression')) {
-                $string = $string->sql_string();
-            }
-            else if ((is_object($string) &&
-                      !method_exists($string, '__toString')) ||
-                     is_array($string)) {
-                /* TODO: blow up */
-            }
-
-            $this->string = "$string";
+    /**
+     * Literal constructor
+     *
+     * @param string $string The literal SQL to include
+     * @return \PGModel\Expression\Literal
+     */
+    function __construct($string) {
+        if ($string instanceof \PGModel\Expression) {
+            $string = $string->sql_string();
+        }
+        else if ((is_object($string) &&
+                  !method_exists($string, '__toString')) ||
+                 is_array($string)) {
+            /* TODO: blow up */
         }
 
-        /**
-         * _QueryLiteral sugary constructor
-         *
-         * Constructs a _QueryLiteral object, or simply returns a
-         * _QueryLiteral object if passed a preconstructed one.
-         *
-         * @param string $string The literal SQL to include
-         * @return _QueryLiteral
-         */
-        public static function create($string) {
-            if (is_a($string, '_QueryLiteral')) {
-                return $string;
-            }
-            else {
-                return new _QueryLiteral($string);
-            }
-        }
+        $this->string = "$string";
+    }
 
-        /**
-         * Produce SQL code from this object.
-         *
-         * Processes this expression and returns the resulting SQL
-         * string.
-         *
-         * @return string
-         */
-        public function sql_string() {
-            return $this->string;
+    /**
+     * Literal sugary constructor
+     *
+     * Constructs a Literal object, or simply returns a
+     * Literal object if passed a preconstructed one.
+     *
+     * @param string $string The literal SQL to include
+     * @return \PGModel\Expression\Literal
+     */
+    public static function create($string) {
+        if ($string instanceof self) {
+            return $string;
         }
-
-        public function refname() {
+        else {
+            return new static($string);
         }
     }
 
-?>
+    /**
+     * Produce SQL code from this object.
+     *
+     * Processes this expression and returns the resulting SQL
+     * string.
+     *
+     * @return string
+     */
+    public function sql_string() {
+        return $this->string;
+    }
+
+    public function refname() {
+    }
+}

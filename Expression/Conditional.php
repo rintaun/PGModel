@@ -1,8 +1,7 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryConditionalExpression implements _QueryExpression {
-        public function sql_string() {
-        }
+class Conditional implements \PGModel\Expression {
+    public function sql_string() {
     }
-
-?>
+}

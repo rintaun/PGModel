@@ -1,8 +1,7 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryLimitingExpression implements _QueryExpression {
-        public function sql_string() {
-        }
+class Limiting implements \PGModel\Expression {
+    public function sql_string() {
     }
-
-?>
+}

@@ -1,6 +1,5 @@
 <?php
+namespace PGModel\Expression\Identifier;
 
-    class _QueryQualifiedIdentifier extends _QueryIdentifier {
-    }
-
-?>
+class Qualified extends \PGModel\Expression\Identifier {
+}

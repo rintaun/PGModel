@@ -1,12 +1,11 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryTable extends _QueryAliasableExpression
-                      implements _QueryTableExpression {
-        public function sql_string() {
-        }
-
-        public function refname() {
-        }
+class Table extends \PGModel\Expression\Aliasable
+            implements \PGModel\Expression\TableExpression {
+    public function sql_string() {
     }
 
-?>
+    public function refname() {
+    }
+}

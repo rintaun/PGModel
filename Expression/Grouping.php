@@ -1,8 +1,7 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryGroupingExpression implements _QueryExpression {
-        public function sql_string() {
-        }
+class Grouping implements \PGModel\Expression {
+    public function sql_string() {
     }
-
-?>
+}

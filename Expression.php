@@ -1,7 +1,6 @@
 <?php
+namespace PGModel;
 
-    interface _QueryExpression {
-        public function sql_string();
-    }
-
-?>
+interface Expression {
+    public function sql_string();
+}

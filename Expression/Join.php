@@ -1,11 +1,10 @@
 <?php
+namespace PGModel\Expression;
 
-    class _QueryJoinExpression implements _QueryTableExpression {
-        public function sql_string() {
-        }
-
-        public function refname() {
-        }
+class Join implements \PGModel\Expression {
+    public function sql_string() {
     }
 
-?>
+    public function refname() {
+    }
+}

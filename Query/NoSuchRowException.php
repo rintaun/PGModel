@@ -1,6 +1,5 @@
 <?php
+namespace PGModel\Query;
 
-    class NoSuchRowException extends RuntimeException {
-    }
-
-?>
+class NoSuchRowException extends RuntimeException {
+}
